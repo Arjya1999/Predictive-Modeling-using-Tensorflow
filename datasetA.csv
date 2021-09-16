@@ -1,4 +1,4 @@
-lr,ag,lc,dc,cr,rg,rc,tg,tc,cc,wd,ld,fd,dw,py,mt,mn,p1,p2,pd,pf,wk1mc,wk2mc,w1,w2,w3,w4,w5,w1t,w2t,w3t,w4t,w5t,dc1,lt,ll3,ll2,ll1,d2l,d1l,lbx,sr,adj1,adj8,ad1,ad8,iw,al,ldiv,predictA
+lr,ag,lc,dt,cr,rg,rc,tg,tc,cc,wd,ld,fd,dw,py,mt,mn,p1,p2,pd,pf,wk1mc,wk2mc,w1,w2,w3,w4,w5,w1t,w2t,w3t,w4t,w5t,dc,lt,ll3,ll2,ll1,d2l,d1l,lbx,sr,adj1,adj8,ad1,ad8,iw,al,ldiv,predictA
 L1,6,A,1000,B,a4,r11,g4,t17,0,-1,-3,19,4,0,0,0,0,-8,-8,3,0,0,0,0,0,23,0,FALSE,FALSE,FALSE,TRUE,FALSE,ts,123,-2,-1.75,-28.25,-26.25,-26.5,-4.29,12,27.19,50.21,27.22,50.24,0,130,13,11
 L3,6,A,1000,B,a4,r11,g4,t17,-1,-1,15,19,4,0,0,0,-1,1,1,9,0,0,0,0,0,23,0,FALSE,FALSE,FALSE,TRUE,FALSE,gs,189,-4.25,-4.75,-4,0.25,0.75,-0.54,5,23,45.76,23.75,46.51,4,130,23,11
 L2,6,A,1000,B,a4,r11,g4,t17,0,-1,7,19,4,0,0,0,0,2,2,5,0,0,0,0,0,23,0,FALSE,FALSE,FALSE,TRUE,FALSE,ts,170,-3,-2,-2.5,0.5,-0.5,-1.53,10,22.99,45.14,23.89,46.04,0,130,8.7,11
