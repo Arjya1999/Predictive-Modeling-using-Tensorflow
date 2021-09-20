@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-dataset=pd.read_csv("datasetA.csv")
+dataset=pd.read_csv("datasetA (1).csv")
 
 dataset.describe()
 
@@ -32,6 +32,7 @@ data_rg =dataset['rg'].value_counts()
 
 for i in name_rg:
     dataset[i+"_rg"]=np.where(dataset["rg"]==i,1,0)  
+
 dataset.drop("rg",inplace=True,axis=1)
 
 name_tg = dataset['tg'].value_counts().index
@@ -40,6 +41,7 @@ data_tg = dataset['tg'].value_counts()
 
 for i in name_tg:
     dataset[i+"_tg"]=np.where(dataset["tg"]==i,1,0)
+
 dataset.drop("tg",inplace=True,axis=1)
 
 name_rc= dataset['rc'].value_counts().index
@@ -48,6 +50,7 @@ data_rc= dataset['rc'].value_counts()
 
 for i in name_rc:
     dataset[i+"_rc"]=np.where(dataset["rc"]==i,1,0)
+
 dataset.drop("rc",inplace=True,axis=1)
 
 name_tc=dataset['tc'].value_counts().index
@@ -56,6 +59,7 @@ data_tc =dataset['tc'].value_counts()
 
 for i in name_tc:
     dataset[i+"_tc"]=np.where(dataset["tc"]==i,1,0)
+
 dataset.drop("tc",inplace=True,axis=1)
 
 data_w1t=dataset['w1t'].value_counts()
@@ -92,31 +96,37 @@ data_predict = dataset["predictA"].value_counts()
 
 dataset.reset_index(inplace=True)
 
-dataset.drop("py",inplace=True,axis=1)
 dataset.drop("index",inplace=True,axis=1)
+
+dataset.drop("py",inplace=True,axis=1)
 
 data_predict = dataset["predictA"].value_counts()
 name = dataset['predictA'].value_counts().index
 
-dataset["1"]=np.where(dataset["predictA"]=="1",1,0)
-dataset["2"]=np.where(dataset["predictA"]=="2",1,0)
-dataset["3"]=np.where(dataset["predictA"]=="3",1,0)
-dataset["4"]=np.where(dataset["predictA"]=="4",1,0)
-dataset["5"]=np.where(dataset["predictA"]=="5",1,0)
-dataset["6"]=np.where(dataset["predictA"]=="6",1,0)
-dataset["7"]=np.where(dataset["predictA"]=="7",1,0)
-dataset["8"]=np.where(dataset["predictA"]=="8",1,0)
-dataset["9"]=np.where(dataset["predictA"]=="9",1,0)
-dataset["10"]=np.where(dataset["predictA"]=="10",1,0)
-dataset["11"]=np.where(dataset["predictA"]=="11",1,0)
-dataset["12"]=np.where(dataset["predictA"]=="12",1,0)
-dataset["13"]=np.where(dataset["predictA"]=="13",1,0)
-dataset["14"]=np.where(dataset["predictA"]=="14",1,0)
+dataset["predictA"]=np.where(dataset["predictA"]==1,"A",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==2,"A",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==3,"B",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==4,"B",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==5,"C",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==6,"C",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==7,"D",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==8,"D",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==9,"D",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==10,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==11,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==12,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==13,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==14,"E",dataset["predictA"])
 
+dataset["A"]=np.where(dataset["predictA"]=="A",1,0)
+dataset["B"]=np.where(dataset["predictA"]=="B",1,0)
+dataset["C"]=np.where(dataset["predictA"]=="C",1,0)
+dataset["D"]=np.where(dataset["predictA"]=="D",1,0)
+dataset["E"]=np.where(dataset["predictA"]=="E",1,0)
 dataset.drop("predictA",inplace=True,axis=1)
 
-X = dataset.iloc[:,:-14].values
-y = dataset.iloc[:,-14:].values
+X = dataset.iloc[:,:-5].values
+y = dataset.iloc[:,-5:].values
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
@@ -138,7 +148,7 @@ classifier = Sequential()
 
 # Adding the input layer and the first hidden layer
 classifier.add(Dense(units = 200, kernel_initializer = 'uniform', activation = 'relu', input_dim = 134))
-#classifier.add(Dropout(rate = 0.2))
+classifier.add(Dropout(rate = 0.2))
 
 # Adding the second hidden layer
 classifier.add(Dense(units = 200, kernel_initializer = 'uniform', activation = 'relu'))
@@ -149,19 +159,19 @@ classifier.add(Dense(units = 200, kernel_initializer = 'uniform', activation = '
 classifier.add(Dropout(rate = 0.2))
 
 # Adding the output layer
-classifier.add(Dense(units = 14, kernel_initializer = 'uniform', activation = 'softmax'))
+classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'softmax'))
 
 # Compiling the ANN
 classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
 
 # Fitting the ANN to the Training set
-history = classifier.fit(X_train, y_train, validation_data=(X_test,y_test),batch_size = 1000, epochs = 50)
+history = classifier.fit(X_train, y_train, validation_data=(X_test,y_test),batch_size = 1000, epochs = 150)
 
 import matplotlib.pyplot as plt
 
 loss_train = history.history['loss']
 loss_val = history.history['val_loss']
-epochs = range(50)
+epochs = range(150)
 plt.plot(epochs, loss_train, 'g', label='Training loss')
 plt.plot(epochs, loss_val, 'b', label='validation loss')
 plt.title('Training and Validation loss')
@@ -179,6 +189,121 @@ y_pred=np.argmax(y_pred,axis=1)
 from sklearn.metrics import accuracy_score
 accuracy = accuracy_score(y_test, y_pred)
 
+classifier.save("model.hdf5")
+
+## Predicting with results
+test_dataset = pd.read_csv("predict_with_result.csv")
+
+true_predictions= test_dataset["predictA"].values
+test_dataset.drop("predictA",inplace=True,axis=1)
+test_dataset.drop("rx",inplace=True,axis=1)
+
+for i in name_lr:
+    test_dataset[i+"_lr"]=np.where(test_dataset["lr"]==i,1,0)  
+test_dataset.drop("lr",inplace=True,axis=1)
+
+test_dataset["lc"]=np.where(test_dataset["lc"]=="A",0,1)
+
+for i in name_cr:
+    test_dataset[i+"_cr"]=np.where(test_dataset["cr"]==i,1,0)
+test_dataset.drop("cr",inplace=True,axis=1)
+
+for i in name_rg:
+    test_dataset[i+"_rg"]=np.where(test_dataset["rg"]==i,1,0)  
+
+test_dataset.drop("rg",inplace=True,axis=1)
+
+for i in name_tg:
+    test_dataset[i+"_tg"]=np.where(test_dataset["tg"]==i,1,0)
+
+test_dataset.drop("tg",inplace=True,axis=1)
+
+for i in name_rc:
+    test_dataset[i+"_rc"]=np.where(test_dataset["rc"]==i,1,0)
+
+test_dataset.drop("rc",inplace=True,axis=1)
+
+for i in name_tc:
+    test_dataset[i+"_tc"]=np.where(test_dataset["tc"]==i,1,0)
+
+test_dataset.drop("tc",inplace=True,axis=1)
+
+test_dataset["w1t"]=np.where(test_dataset["w1t"]=="False",0,1)
+test_dataset["w2t"]=np.where(test_dataset["w2t"]=="False",0,1)
+test_dataset["w3t"]=np.where(test_dataset["w3t"]=="False",0,1)
+test_dataset["w4t"]=np.where(test_dataset["w4t"]=="False",0,1)
+test_dataset["w5t"]=np.where(test_dataset["w5t"]=="False",0,1)
+
+for i in name_dc:
+    test_dataset[i+"_dc"]=np.where(test_dataset["dc"]==i,1,0)   
+test_dataset.drop("dc",inplace=True,axis=1)
+
+test_dataset.drop("py",inplace=True,axis=1)
+
+test=test_dataset.iloc[:,:].values
+
+test = sc.transform(test)
+predictions = classifier.predict(test)
+
+predictions = np.argmax(predictions,axis=1)
+predictions = predictions+1
+
+if predictions[0]==3:
+    predictions=np.where(predictions==3,"C",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=1:
+    predictions=np.where(predictions==1,"A",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=2:
+    predictions=np.where(predictions==2,"B",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=4:
+    predictions=np.where(predictions==4,"D",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=5:
+    predictions=np.where(predictions==5,"E",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    
+    true_predictions=np.where(true_predictions==1,"A",true_predictions)
+true_predictions=np.where(true_predictions=='2',"A",true_predictions)
+true_predictions=np.where(true_predictions=='3',"B",true_predictions)
+true_predictions=np.where(true_predictions=='4',"B",true_predictions)
+true_predictions=np.where(true_predictions=='5',"C",true_predictions)
+true_predictions=np.where(true_predictions=='6',"C",true_predictions)
+true_predictions=np.where(true_predictions=='7',"D",true_predictions)
+true_predictions=np.where(true_predictions=='8',"D",true_predictions)
+true_predictions=np.where(true_predictions=='9',"D",true_predictions)
+true_predictions=np.where(true_predictions=='10',"E",true_predictions)
+true_predictions=np.where(true_predictions=='11',"E",true_predictions)
+true_predictions=np.where(true_predictions=='12',"E",true_predictions)
+true_predictions=np.where(true_predictions=='13',"E",true_predictions)
+true_predictions=np.where(true_predictions=='14',"E",true_predictions)
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(true_predictions, predictions)
+print(accuracy)
+
+test_dataset["rx"]=predictions
+test_dataset["predictA"]=true_predictions
+
+test_dataset.to_csv("predicted_dataset_ANN.csv")
+
+# Predicting without results
 test_dataset = pd.read_csv("datasetA_predict.csv")
 predicted_dataset=pd.read_csv("datasetA_predict.csv")
 
@@ -228,6 +353,37 @@ predictions = classifier.predict(test)
 predictions = np.argmax(predictions,axis=1)
 predictions = predictions+1
 
-predicted_dataset["predictA"]=predictions
+if predictions[0]==3:
+    predictions=np.where(predictions==3,"C",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=1:
+    predictions=np.where(predictions==1,"A",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=2:
+    predictions=np.where(predictions==2,"B",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=4:
+    predictions=np.where(predictions==4,"D",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=5:
+    predictions=np.where(predictions==5,"E",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    
+test_dataset["predictA"]=predictions
 
-predicted_dataset.to_csv("predicted_dataset.csv")
+test_dataset.to_csv("predicted_dataset_ANN2.csv")
