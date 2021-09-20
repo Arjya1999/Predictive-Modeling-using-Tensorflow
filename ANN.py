@@ -279,7 +279,7 @@ elif predictions[0]==5:
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='1',"A",predictions)
     
-    true_predictions=np.where(true_predictions==1,"A",true_predictions)
+true_predictions=np.where(true_predictions==1,"A",true_predictions)
 true_predictions=np.where(true_predictions=='2',"A",true_predictions)
 true_predictions=np.where(true_predictions=='3',"B",true_predictions)
 true_predictions=np.where(true_predictions=='4',"B",true_predictions)
