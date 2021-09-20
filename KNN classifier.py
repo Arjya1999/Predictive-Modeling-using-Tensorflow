@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-dataset=pd.read_csv("datasetA.csv")
+dataset=pd.read_csv("datasetA (1).csv")
 
 dataset.describe()
 
@@ -98,20 +98,20 @@ dataset.drop("index",inplace=True,axis=1)
 data_predict = dataset["predictA"].value_counts()
 name = dataset['predictA'].value_counts().index
 
-dataset["predictA"]=np.where(dataset["predictA"]=="1","A",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="2","A",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="3","B",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="4","B",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="5","C",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="6","C",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="7","D",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="8","D",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="9","D",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="10","E",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="11","E",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="12","E",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="13","E",dataset["predictA"])
-dataset["predictA"]=np.where(dataset["predictA"]=="14","E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==1,"A",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==2,"A",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==3,"B",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==4,"B",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==5,"C",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==6,"C",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==7,"D",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==8,"D",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==9,"D",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==10,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==11,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==12,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==13,"E",dataset["predictA"])
+dataset["predictA"]=np.where(dataset["predictA"]==14,"E",dataset["predictA"])
 
 y = dataset["predictA"].values
 dataset.drop("predictA", inplace=True,axis=1)
@@ -138,7 +138,82 @@ y_pred = classifier.predict(X_test)
 
 from sklearn.metrics import accuracy_score
 accuracy = accuracy_score(y_test, y_pred)
+print(accuracy)
 
+# Prediction with results
+test_dataset = pd.read_csv("predict_with_result.csv")
+
+true_predictions= test_dataset["predictA"].values
+test_dataset.drop("predictA",inplace=True,axis=1)
+test_dataset.drop("rx",inplace=True,axis=1)
+
+for i in name_lr:
+    test_dataset[i+"_lr"]=np.where(test_dataset["lr"]==i,1,0)  
+test_dataset.drop("lr",inplace=True,axis=1)
+
+test_dataset["lc"]=np.where(test_dataset["lc"]=="A",0,1)
+
+for i in name_cr:
+    test_dataset[i+"_cr"]=np.where(test_dataset["cr"]==i,1,0)
+test_dataset.drop("cr",inplace=True,axis=1)
+
+for i in name_rg:
+    test_dataset[i+"_rg"]=np.where(test_dataset["rg"]==i,1,0)  
+test_dataset.drop("rg",inplace=True,axis=1)
+
+for i in name_tg:
+    test_dataset[i+"_tg"]=np.where(test_dataset["tg"]==i,1,0)
+test_dataset.drop("tg",inplace=True,axis=1)
+
+for i in name_rc:
+    test_dataset[i+"_rc"]=np.where(test_dataset["rc"]==i,1,0)
+test_dataset.drop("rc",inplace=True,axis=1)
+
+for i in name_tc:
+    test_dataset[i+"_tc"]=np.where(test_dataset["tc"]==i,1,0)
+test_dataset.drop("tc",inplace=True,axis=1)
+
+test_dataset["w1t"]=np.where(test_dataset["w1t"]=="False",0,1)
+test_dataset["w2t"]=np.where(test_dataset["w2t"]=="False",0,1)
+test_dataset["w3t"]=np.where(test_dataset["w3t"]=="False",0,1)
+test_dataset["w4t"]=np.where(test_dataset["w4t"]=="False",0,1)
+test_dataset["w5t"]=np.where(test_dataset["w5t"]=="False",0,1)
+
+for i in name_dc:
+    test_dataset[i+"_dc"]=np.where(test_dataset["dc"]==i,1,0)
+    
+test_dataset.drop("dc",inplace=True,axis=1)
+test_dataset.drop("py",inplace=True,axis=1)
+
+test=test_dataset.iloc[:,:].values
+
+test = sc.transform(test)
+predictions = classifier.predict(test)
+
+true_predictions=np.where(true_predictions==1,"A",true_predictions)
+true_predictions=np.where(true_predictions=='2',"A",true_predictions)
+true_predictions=np.where(true_predictions=='3',"B",true_predictions)
+true_predictions=np.where(true_predictions=='4',"B",true_predictions)
+true_predictions=np.where(true_predictions=='5',"C",true_predictions)
+true_predictions=np.where(true_predictions=='6',"C",true_predictions)
+true_predictions=np.where(true_predictions=='7',"D",true_predictions)
+true_predictions=np.where(true_predictions=='8',"D",true_predictions)
+true_predictions=np.where(true_predictions=='9',"D",true_predictions)
+true_predictions=np.where(true_predictions=='10',"E",true_predictions)
+true_predictions=np.where(true_predictions=='11',"E",true_predictions)
+true_predictions=np.where(true_predictions=='12',"E",true_predictions)
+true_predictions=np.where(true_predictions=='13',"E",true_predictions)
+true_predictions=np.where(true_predictions=='14',"E",true_predictions)
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(true_predictions, predictions)
+
+test_dataset["rx"]=predictions
+test_dataset["predictA"]=true_predictions
+
+test_dataset.to_csv("predicted_dataset_KNN.csv")
+
+# Predicting without results
 test_dataset = pd.read_csv("datasetA_predict.csv")
 predicted_dataset=pd.read_csv("datasetA_predict.csv")
 
@@ -185,6 +260,37 @@ test=test_dataset.iloc[:,:].values
 test = sc.transform(test)
 predictions = classifier.predict(test)
 
-predicted_dataset["predictA"]=predictions
+if predictions[0]==3:
+    predictions=np.where(predictions==3,"C",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=1:
+    predictions=np.where(predictions==1,"A",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=2:
+    predictions=np.where(predictions==2,"B",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=4:
+    predictions=np.where(predictions==4,"D",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    predictions=np.where(predictions=='5',"E",predictions)
+elif predictions[0]=5:
+    predictions=np.where(predictions==5,"E",predictions)
+    predictions=np.where(predictions=='3',"C",predictions)
+    predictions=np.where(predictions=='2',"B",predictions)
+    predictions=np.where(predictions=='4',"D",predictions)
+    predictions=np.where(predictions=='1',"A",predictions)
+    
+test_dataset["predictA"]=predictions
 
-predicted_dataset.to_csv("predicted_dataset_KNN.csv")
+test_dataset.to_csv("predicted_dataset_KNN2.csv")
