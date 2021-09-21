@@ -254,32 +254,32 @@ if predictions[0]==3:
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=1:
+elif predictions[0]==1:
     predictions=np.where(predictions==1,"A",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=2:
+elif predictions[0]==2:
     predictions=np.where(predictions==2,"B",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='1',"A",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=4:
+elif predictions[0]==4:
     predictions=np.where(predictions==4,"D",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='1',"A",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=5:
+elif predictions[0]==5:
     predictions=np.where(predictions==5,"E",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='1',"A",predictions)
     
-    true_predictions=np.where(true_predictions==1,"A",true_predictions)
+true_predictions=np.where(true_predictions==1,"A",true_predictions)
 true_predictions=np.where(true_predictions=='2',"A",true_predictions)
 true_predictions=np.where(true_predictions=='3',"B",true_predictions)
 true_predictions=np.where(true_predictions=='4',"B",true_predictions)
@@ -359,25 +359,25 @@ if predictions[0]==3:
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=1:
+elif predictions[0]==1:
     predictions=np.where(predictions==1,"A",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=2:
+elif predictions[0]==2:
     predictions=np.where(predictions==2,"B",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='1',"A",predictions)
     predictions=np.where(predictions=='4',"D",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=4:
+elif predictions[0]==4:
     predictions=np.where(predictions==4,"D",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='2',"B",predictions)
     predictions=np.where(predictions=='1',"A",predictions)
     predictions=np.where(predictions=='5',"E",predictions)
-elif predictions[0]=5:
+elif predictions[0]==5:
     predictions=np.where(predictions==5,"E",predictions)
     predictions=np.where(predictions=='3',"C",predictions)
     predictions=np.where(predictions=='2',"B",predictions)
