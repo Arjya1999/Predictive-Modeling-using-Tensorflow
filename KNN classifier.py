@@ -140,6 +140,9 @@ from sklearn.metrics import accuracy_score
 accuracy = accuracy_score(y_test, y_pred)
 print(accuracy)
 
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, y_pred)
+
 # Prediction with results
 test_dataset = pd.read_csv("predict_with_result.csv")
 
@@ -207,6 +210,9 @@ true_predictions=np.where(true_predictions=='14',"E",true_predictions)
 
 from sklearn.metrics import accuracy_score
 accuracy = accuracy_score(true_predictions, predictions)
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(true_predictions, predictions)
 
 test_dataset["rx"]=predictions
 test_dataset["predictA"]=true_predictions
